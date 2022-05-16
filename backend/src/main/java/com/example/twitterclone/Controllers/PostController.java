@@ -4,6 +4,7 @@ import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.example.twitterclone.Configuration.SecurityConstants;
 import com.example.twitterclone.CreateRequests.PostCreateRequest;
 import com.example.twitterclone.DTOs.PostDTO;
 import com.example.twitterclone.Entities.Post;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -26,6 +29,7 @@ public class PostController {
     private final PostService postService;
     private final ModelMapper modelMapper;
 
+    @Operation(security = { @SecurityRequirement(name = SecurityConstants.SECURITY_REQUIREMENT) })
     @PostMapping
     public PostDTO createPost(Principal principal, @RequestBody PostCreateRequest postCreateRequest) {
         String username = principal.getName();
@@ -33,16 +37,19 @@ public class PostController {
         return convertToDTO(createdPost);
     }
 
+    @Operation(security = { @SecurityRequirement(name = SecurityConstants.SECURITY_REQUIREMENT) })
     @GetMapping("/{id}")
     public PostDTO getPost(@PathVariable Long id) {
         return convertToDTO(postService.get(id));
     }
 
+    @Operation(security = { @SecurityRequirement(name = SecurityConstants.SECURITY_REQUIREMENT) })
     @GetMapping
     public List<PostDTO> getPosts() {
         return postService.getAll().stream().map(this::convertToDTO).collect(Collectors.toList());
     }
 
+    @Operation(security = { @SecurityRequirement(name = SecurityConstants.SECURITY_REQUIREMENT) })
     @GetMapping(path = "/feed")
     public List<PostDTO> getFeed(Principal principal) {
         String username = principal.getName();

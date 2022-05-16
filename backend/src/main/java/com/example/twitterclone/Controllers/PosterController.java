@@ -4,6 +4,7 @@ import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.example.twitterclone.Configuration.SecurityConstants;
 import com.example.twitterclone.CreateRequests.FollowCreateRequest;
 import com.example.twitterclone.CreateRequests.PosterCreateRequest;
 import com.example.twitterclone.DTOs.PosterDTO;
@@ -19,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -34,6 +37,12 @@ public class PosterController {
         return convertToDTOWithPosts(createdPoster);
     }
 
+    @PostMapping("/login")
+    public void login(@RequestBody PosterCreateRequest credentials) {
+        throw new IllegalStateException("This method shouldn't be called. It's implemented by Spring Security Filters");
+    }
+
+    @Operation(security = { @SecurityRequirement(name = SecurityConstants.SECURITY_REQUIREMENT) })
     @PostMapping(path = "/follow")
     public PosterDTOWithPosts createFollow(Principal principal, @RequestBody FollowCreateRequest followCreateRequest) {
         String username = principal.getName();
@@ -41,11 +50,13 @@ public class PosterController {
         return convertToDTOWithPosts(follower);
     }
 
+    @Operation(security = { @SecurityRequirement(name = SecurityConstants.SECURITY_REQUIREMENT) })
     @GetMapping("/{username}")
     public PosterDTOWithPosts getPoster(@PathVariable String username) {
         return convertToDTOWithPosts(posterService.getUserByUsername(username));
     }
 
+    @Operation(security = { @SecurityRequirement(name = SecurityConstants.SECURITY_REQUIREMENT) })
     @GetMapping
     public List<PosterDTO> getPosters() {
         return posterService.getAll().stream().map(this::convertToDTO).collect(Collectors.toList());
