@@ -3,6 +3,8 @@ package com.example.twitterclone.Services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
+
 import com.example.twitterclone.CreateRequests.PostCreateRequest;
 import com.example.twitterclone.Entities.Post;
 import com.example.twitterclone.Entities.Poster;
@@ -29,6 +31,14 @@ public class PostService {
         post.setAuthor(byUsername.get());
         postRepository.save(post);
         return post;
+    }
+
+    public Post get(Long id) {
+        return postRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+    }
+
+    public List<Post> getAll() {
+        return postRepository.findAll();
     }
 
     public List<Post> getFeed(String username) {
