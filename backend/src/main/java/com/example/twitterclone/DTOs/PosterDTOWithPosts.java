@@ -5,6 +5,6 @@ import java.util.List;
 import lombok.Data;
 
 @Data
-public class PosterDTOWithPosts extends PostDTO {
+public class PosterDTOWithPosts extends PosterDTO {
     private List<PostDTO> posts;
 }
