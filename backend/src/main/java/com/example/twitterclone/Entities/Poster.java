@@ -13,6 +13,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -26,6 +28,7 @@ public class Poster {
     @Id
     private String username;
     private String password;
+    @CreationTimestamp
     private final LocalDateTime createdAt = LocalDateTime.now(ZoneOffset.UTC);
 
     @ManyToMany(cascade = CascadeType.ALL)

@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -24,6 +26,7 @@ public class Follow {
     private String followee_name;
     @Id
     private String follower_name;
+    @CreationTimestamp
     private final LocalDateTime createdAt = LocalDateTime.now(ZoneOffset.UTC);
 }
 
