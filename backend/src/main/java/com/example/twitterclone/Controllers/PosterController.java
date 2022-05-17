@@ -38,7 +38,7 @@ public class PosterController {
     }
 
     @PostMapping("/login")
-    public void login(@RequestBody PosterCreateRequest credentials) {
+    public String login(@RequestBody PosterCreateRequest credentials) {
         throw new IllegalStateException("This method shouldn't be called. It's implemented by Spring Security Filters");
     }
 
