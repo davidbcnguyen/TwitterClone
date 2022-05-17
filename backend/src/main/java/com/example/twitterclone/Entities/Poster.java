@@ -1,6 +1,7 @@
 package com.example.twitterclone.Entities;
 
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -25,7 +26,7 @@ public class Poster {
     @Id
     private String username;
     private String password;
-    private final LocalDateTime createdAt = LocalDateTime.now();
+    private final LocalDateTime createdAt = LocalDateTime.now(ZoneOffset.UTC);
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "follow",

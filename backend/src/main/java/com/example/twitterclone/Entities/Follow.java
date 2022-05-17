@@ -2,6 +2,7 @@ package com.example.twitterclone.Entities;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -23,7 +24,7 @@ public class Follow {
     private String followee_name;
     @Id
     private String follower_name;
-    private final LocalDateTime createdAt = LocalDateTime.now();
+    private final LocalDateTime createdAt = LocalDateTime.now(ZoneOffset.UTC);
 }
 
 class FollowKey implements Serializable {

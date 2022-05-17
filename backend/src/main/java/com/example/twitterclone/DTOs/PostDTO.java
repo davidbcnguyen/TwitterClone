@@ -9,5 +9,5 @@ public class PostDTO {
     private Long id;
     private String body;
     private String author;
-    private final LocalDateTime createdAt = LocalDateTime.now();
+    private final LocalDateTime createdAt;
 }
