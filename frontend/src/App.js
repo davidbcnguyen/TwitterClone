@@ -1,5 +1,7 @@
 import React from 'react';
-import { BrowserRouter, Routes } from 'react-router-dom';
+import { HashRouter, Route, Routes } from 'react-router-dom';
+import AllPosts from './Components/AllPosts';
+import Feed from './Components/Feed';
 import NavBar from './Components/NavBar';
 
 function App() {
@@ -53,11 +55,13 @@ function App() {
   // );
   return (
     <div className="App">
-      <NavBar></NavBar>
-      <BrowserRouter>
+      <HashRouter>
+        <NavBar />
         <Routes>
+          <Route path="/" element={<AllPosts />} />
+          <Route path="/feed" element={<Feed />} />
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </div>
   );
 }

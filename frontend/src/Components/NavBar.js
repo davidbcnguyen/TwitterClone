@@ -1,4 +1,5 @@
 import { Container, Form, FormControl, Nav, Navbar } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 export default function NavBar() {
     return (
@@ -11,8 +12,8 @@ export default function NavBar() {
                         <FormControl type="search" placeholder="Search users" className="me-2" aria-label="Search"/>
                     </Form>
                     <Nav>
-                        <Nav.Link>Home</Nav.Link>
-                        <Nav.Link>Feed</Nav.Link>
+                        <Nav.Link as={Link} to="/">Home</Nav.Link>
+                        <Nav.Link as={Link} to="/feed">Feed</Nav.Link>
                         <Nav.Link>Profile</Nav.Link>
                         <Nav.Link>Logout</Nav.Link>
                     </Nav>
