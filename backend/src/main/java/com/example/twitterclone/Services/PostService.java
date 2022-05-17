@@ -44,8 +44,4 @@ public class PostService {
     public List<Post> getFeed(String username) {
         return postRepository.getFollowedPosts(username);
     }
-
-    public List<Post> getFeed(Long id) {
-        return postRepository.getFollowedPosts(id);
-    }
 }

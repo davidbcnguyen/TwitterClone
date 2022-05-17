@@ -24,6 +24,6 @@ public class Post {
     private String body;
 
     @ManyToOne
-    @JoinColumn(name = "author_id")
+    @JoinColumn(name = "author_name")
     private Poster author;
 }

@@ -4,8 +4,6 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -24,15 +22,13 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Poster {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     private String username;
     private String password;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "follow",
-            joinColumns = @JoinColumn(name = "follower_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "followee_id", referencedColumnName = "id"))
+            joinColumns = @JoinColumn(name = "follower_name", referencedColumnName = "username"),
+            inverseJoinColumns = @JoinColumn(name = "followee_name", referencedColumnName = "username"))
     private List<Poster> followings;
 
     @ManyToMany(mappedBy = "followings")

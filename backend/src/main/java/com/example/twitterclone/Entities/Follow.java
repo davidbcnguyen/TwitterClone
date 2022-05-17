@@ -19,12 +19,12 @@ import lombok.Setter;
 @IdClass(FollowKey.class)
 public class Follow {
     @Id
-    private Long followee_id;
+    private String followee_name;
     @Id
-    private Long follower_id;
+    private String follower_name;
 }
 
 class FollowKey implements Serializable {
-    private Long followee_id;
-    private Long follower_id;
+    private String followee_name;
+    private String follower_name;
 }
