@@ -4,7 +4,7 @@ import {
   decrement,
   increment, incrementAsync, incrementByAmount, incrementIfOdd,
   selectCount
-} from './counterSlice';
+} from '../Store/counterSlice';
 
 export function Counter() {
   const count = useSelector(selectCount);
