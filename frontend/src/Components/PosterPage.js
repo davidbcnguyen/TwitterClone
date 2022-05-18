@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { fetchPoster } from "../APIs/BackendCalls";
+import CreatePost from "./CreatePost";
 import Poster from "./Poster";
 import Posts from "./Posts";
 
@@ -24,7 +25,8 @@ export default function PosterPage() {
                         <Poster username={profile.username} createdAt={profile.createdAt} />
                     </Container>
                 </Col>
-                <Col sm={8}>
+                <Col sm={8} style={{ width: '36rem' }}>
+                    <CreatePost />
                     <Posts posts={profile.posts}/>
                 </Col>
             </Row>

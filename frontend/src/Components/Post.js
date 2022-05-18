@@ -13,7 +13,7 @@ export default function Post({ author, body, createdAt }) {
         }
     )
     return (
-        <Card style={{ width: '18rem' }}>
+        <Card>
             <Card.Body>
                 <Card.Title>
                     <Link to={`/poster/${author}`}>{author}</Link>

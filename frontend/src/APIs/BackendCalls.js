@@ -18,3 +18,7 @@ export function fetchPosters() {
 export function fetchPoster(username) {
     return axios.get(`/poster/${username}`)
 }
+
+export function submitPost(body) {
+    return axios.post(`/post`, { body });
+}
