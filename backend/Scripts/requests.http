@@ -27,7 +27,7 @@ Content-Type: application/json
 GET http://localhost:8080/api/post HTTP/1.1
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkYXZpZCIsImV4cCI6MTY1MzY0MTkwMH0.9koPTzVhzO91oBMFtEyZw-pHlssAjCZ61rm3Pd1lsf5di7KtmEUjkemR6zM4Wwl5CY8xdsWOsX7tn4YWg79Onw
 ###
-GET http://localhost:8080/api/poster HTTP/1.1
+GET http://localhost:8080/api/poster?query=david2 HTTP/1.1
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkYXZpZCIsImV4cCI6MTY1MzY0MTkwMH0.9koPTzVhzO91oBMFtEyZw-pHlssAjCZ61rm3Pd1lsf5di7KtmEUjkemR6zM4Wwl5CY8xdsWOsX7tn4YWg79Onw
 ###
 GET http://localhost:8080/api/poster/david HTTP/1.1

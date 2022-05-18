@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -80,8 +81,12 @@ public class PosterController {
 
     @Operation(security = { @SecurityRequirement(name = SecurityConstants.SECURITY_REQUIREMENT) })
     @GetMapping
-    public List<PosterDTO> getPosters() {
-        return posterService.getAll().stream().map(this::convertToDTO).collect(Collectors.toList());
+    public List<PosterDTO> getPosters(@RequestParam(defaultValue = "") String query) {
+        if (query.length() > 0) {
+            return posterService.searchUsername(query).stream().map(this::convertToDTO).collect(Collectors.toList());
+        } else {
+            return posterService.getAll().stream().map(this::convertToDTO).collect(Collectors.toList());
+        }
     }
 
     private PosterDTOWithPosts convertToDTOWithPosts(Poster poster) {

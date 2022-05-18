@@ -1,7 +1,8 @@
-import { Container, Form, FormControl, Nav, Navbar, NavDropdown } from "react-bootstrap";
+import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout, selectUsername } from "../Store/PosterSlice";
+import SearchPosterBar from "./SearchPosterBar";
 
 export default function NavBar() {
     const username = useSelector(selectUsername);
@@ -14,15 +15,12 @@ export default function NavBar() {
     return (
         <Navbar expand="lg" bg="dark" variant="dark">
             <Container>
-                <Navbar.Brand>Twitter Clone</Navbar.Brand>
+                <Navbar.Brand as={Link} to="/">Twitter Clone</Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
                 <Navbar.Collapse id="responsive-navbar-nav">
-                    <Form className="me-auto">
-                        <FormControl type="search" placeholder="Search users" className="me-2" aria-label="Search"/>
-                    </Form>
+                    <SearchPosterBar />
                     {username !== "" ? 
                     <Nav>
-                        <Nav.Link as={Link} to="/">Home</Nav.Link>
                         <Nav.Link as={Link} to="/feed">Feed</Nav.Link>
                         <NavDropdown title={username} id="basic-nav-dropdown">
                             <NavDropdown.Item as={Link} to={`/poster/${username}`}>Profile</NavDropdown.Item>

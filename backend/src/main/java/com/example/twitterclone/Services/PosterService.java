@@ -27,6 +27,10 @@ public class PosterService {
         return posterRepository.findByUsername(username).orElseThrow(EntityNotFoundException::new);
     }
 
+    public List<Poster> searchUsername(String username) {
+        return posterRepository.searchUser(username);
+    }
+
     public List<Poster> getAll() {
         return posterRepository.findAll(Sort.by("createdAt").descending());
     }

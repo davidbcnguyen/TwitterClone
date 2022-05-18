@@ -15,6 +15,10 @@ export function fetchPosters() {
     return axios.get("/poster");
 }
 
+export function searchPosters(username) {
+    return axios.get(`/poster?query=${username}`);
+}
+
 export function fetchPoster(username) {
     return axios.get(`/poster/${username}`)
 }
