@@ -1,15 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Button, Card } from "react-bootstrap";
-import { follow, getFollowees, unfollow } from "../APIs/BackendCalls";
+import { useDispatch, useSelector } from "react-redux";
+import { addFollowAsync, fetchFolloweesAsync, removeFollowAsync, selectFollowees, selectFollowers } from "../Store/FollowSlice";
 
 export default function Poster({ username, createdAt }) {
-    const [followed, setFollowed] = useState(new Set());
+    const followees = useSelector(selectFollowees);
+    const followers = useSelector(selectFollowers);
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        getFollowees()
-            .then(({ data }) => setFollowed(new Set(data)))
-            .catch(err => console.log(err))
-    }, [username]);
+        dispatch(fetchFolloweesAsync())
+    }, []);
 
     const convertedTime = new Date(createdAt).toLocaleDateString(
         "en-ca",
@@ -23,22 +24,19 @@ export default function Poster({ username, createdAt }) {
     )
 
     const handleButtonClicked = () => {
-        if (followed.has(username)) {
-            unfollow(username)
-            .then()
-            .catch(error => console.log(error));
+        if (followees[username] === true) {
+            dispatch(removeFollowAsync(username))
         } else {
-            follow(username)
-            .then()
-            .catch(error => console.log(error));
+            dispatch(addFollowAsync(username))
         }
     }
 
     return (
         <Card>
             <Card.Title>{username}</Card.Title>
-            <Card.Subtitle>{convertedTime}</Card.Subtitle>
-            <Button onClick={handleButtonClicked}>{followed.has(username) ? "Unfollow" : "Follow"}</Button>
+            <Card.Subtitle>Joined on {convertedTime}</Card.Subtitle>
+            {followers[username] === true ? <Card.Text>Follows you</Card.Text> : null}
+            <Button onClick={handleButtonClicked}>{followees[username] === true ? "Unfollow" : "Follow"}</Button>
         </Card>
     );
 }
