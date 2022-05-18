@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Card, Form } from "react-bootstrap";
+import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 
 export default function LoginForm({ text, submitFunction }) {
@@ -22,19 +22,23 @@ export default function LoginForm({ text, submitFunction }) {
     }
 
     return (
-        <Card>
-            <Card.Body>
-                <Card.Title>{text}</Card.Title>
-                <Form onSubmit={handleSubmit}>
-                    <Form.Group className="mb-3" controlId="formUsername">
-                        <Form.Control type="text" value={username} placeholder="Enter username" onChange={handleUsernameChange} />
-                    </Form.Group>
-                    <Form.Group className="mb-3" controlId="formUsername">
-                        <Form.Control type="password" value={password} placeholder="Password" onChange={handlePasswordChange} />
-                    </Form.Group>
-                    <Button variant="primary" type="submit">{text}</Button>
-                </Form>
-            </Card.Body>
-        </Card>
+        <Container>
+            <Row className="justify-content-md-center">
+                <Card as={Col} md="auto">
+                    <Card.Body>
+                        <Card.Title>{text}</Card.Title>
+                        <Form onSubmit={handleSubmit}>
+                            <Form.Group className="mb-3" controlId="formUsername">
+                                <Form.Control type="text" value={username} placeholder="Enter username" onChange={handleUsernameChange} />
+                            </Form.Group>
+                            <Form.Group className="mb-3" controlId="formUsername">
+                                <Form.Control type="password" value={password} placeholder="Password" onChange={handlePasswordChange} />
+                            </Form.Group>
+                            <Button variant="primary" type="submit">{text}</Button>
+                        </Form>
+                    </Card.Body>
+                </Card>
+            </Row>
+        </Container>
     );
 }
