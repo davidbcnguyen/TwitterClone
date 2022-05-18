@@ -29,11 +29,11 @@ export default function NavBar() {
                         </NavDropdown>
                     </Nav> :
                     <Nav>
-                        <Nav.Link as={Link} to="/register">Register</Nav.Link>
                         <Nav.Link as={Link} to="/login">Login</Nav.Link>
+                        <Nav.Link as={Link} to="/register">Register</Nav.Link>
                     </Nav>}
                     <Nav className="d-flex">
-                        <Nav.Link href="https://github.com/davidbcnguyen/TwitterClone">Source Code</Nav.Link>
+                        <Nav.Link href="https://github.com/davidbcnguyen/TwitterClone"><i className="bi bi-github"></i></Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Container>
