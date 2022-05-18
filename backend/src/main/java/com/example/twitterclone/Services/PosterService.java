@@ -1,5 +1,6 @@
 package com.example.twitterclone.Services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -58,6 +59,9 @@ public class PosterService {
             throw new RuntimeException("Follower not found");
         }
         Poster follower = byUsername.get();
+        if (follower.getFollowings() == null) {
+            follower.setFollowings(new ArrayList<Poster>());
+        }
         follower.getFollowings().add(followee);
         posterRepository.save(follower);
         return follower;

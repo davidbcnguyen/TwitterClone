@@ -39,6 +39,9 @@ public class PosterController {
     @PostMapping
     public String createPoster(@RequestBody PosterCreateRequest posterCreateRequest) {
         Poster createdPoster = posterService.createPoster(posterCreateRequest);
+        FollowCreateRequest followCreate = new FollowCreateRequest();
+        followCreate.setFollowee_name(createdPoster.getUsername());
+        posterService.createFollow(createdPoster.getUsername(), followCreate);
         return SecurityConstants.TOKEN_PREFIX + 
                 JWT.create()
                     .withSubject(createdPoster.getUsername())
