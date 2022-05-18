@@ -34,3 +34,11 @@ export function follow(username) {
 export function unfollow(username) {
     return axios.delete(`/poster/follow`, { data: { followee_name: username } });
 }
+
+export function login(username, password) {
+    return axios.post("/poster/login", { username, password });
+}
+
+export function register(username, password) {
+    return axios.post("/poster/", { username, password });
+}
