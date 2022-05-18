@@ -11,6 +11,7 @@ import com.example.twitterclone.Entities.Poster;
 import com.example.twitterclone.Repositories.PostRepository;
 import com.example.twitterclone.Repositories.PosterRepository;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -38,7 +39,7 @@ public class PostService {
     }
 
     public List<Post> getAll() {
-        return postRepository.findAll();
+        return postRepository.findAll(Sort.by("createdAt").descending());
     }
 
     public List<Post> getFeed(String username) {

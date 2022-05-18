@@ -11,6 +11,7 @@ import com.example.twitterclone.CreateRequests.PosterCreateRequest;
 import com.example.twitterclone.Entities.Poster;
 import com.example.twitterclone.Repositories.PosterRepository;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +28,7 @@ public class PosterService {
     }
 
     public List<Poster> getAll() {
-        return posterRepository.findAll();
+        return posterRepository.findAll(Sort.by("createdAt").descending());
     }
 
     public Poster createPoster(PosterCreateRequest posterCreateRequest) {
