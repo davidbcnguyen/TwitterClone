@@ -1,7 +1,10 @@
 import { useState } from "react";
 import { Button, Card, Form } from "react-bootstrap";
+import { useDispatch } from "react-redux";
 
 export default function LoginForm({ text, submitFunction }) {
+    const dispatch = useDispatch();
+
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
@@ -14,7 +17,7 @@ export default function LoginForm({ text, submitFunction }) {
     }
 
     const handleSubmit = () => {
-        submitFunction(username, password);
+        dispatch(submitFunction({ username, password }));
         setPassword("");
     }
 

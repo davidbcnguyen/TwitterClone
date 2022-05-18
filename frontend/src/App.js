@@ -1,6 +1,5 @@
 import React from 'react';
 import { HashRouter, Route, Routes } from 'react-router-dom';
-import { login, register } from './APIs/BackendCalls';
 import AllPosts from './Components/AllPosts';
 import Feed from './Components/Feed';
 import LoginForm from './Components/LoginForm';
@@ -9,6 +8,7 @@ import PosterPage from './Components/PosterPage';
 import PostersPage from './Components/PostersPage';
 import RequireAuth from './Components/RequireAuth';
 import RequireNotAuth from './Components/RequireNotAuth';
+import { loginAsync, registerAsync } from './Store/PosterSlice';
 
 function App() {
     return (
@@ -17,8 +17,8 @@ function App() {
                 <NavBar />
                 <Routes>
                     <Route element={<RequireNotAuth />}>
-                        <Route path="/login" element={<LoginForm text="Login" submitFunction={login} />}/>
-                        <Route path="/register" element={<LoginForm text="Register" submitFunction={register} />}/>
+                        <Route path="/login" element={<LoginForm text="Login" submitFunction={loginAsync} />}/>
+                        <Route path="/register" element={<LoginForm text="Register" submitFunction={registerAsync} />}/>
                     </Route>
                     <Route element={<RequireAuth />}>
                         <Route path="/" element={<AllPosts />} />
