@@ -2,6 +2,7 @@ package com.example.twitterclone.Services;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.persistence.EntityNotFoundException;
 
@@ -42,18 +43,39 @@ public class PosterService {
     }
 
     public Poster createFollow(String username, FollowCreateRequest followCreateRequest) {
-        Optional<Poster> byUsername = posterRepository.findByUsername(followCreateRequest.getFollowee_username());
+        Optional<Poster> byUsername = posterRepository.findByUsername(followCreateRequest.getFollowee_name());
         if (byUsername.isEmpty()) {
-            throw new RuntimeException("User not found");
+            throw new RuntimeException("Followee not found");
         }
         Poster followee = byUsername.get();
         byUsername = posterRepository.findByUsername(username);
         if (byUsername.isEmpty()) {
-            throw new RuntimeException("User not found");
+            throw new RuntimeException("Follower not found");
         }
         Poster follower = byUsername.get();
         follower.getFollowings().add(followee);
         posterRepository.save(follower);
         return follower;
+    }
+
+    public Poster deleteFollow(String username, FollowCreateRequest followDeleteRequest) {
+        Optional<Poster> byUsername = posterRepository.findByUsername(followDeleteRequest.getFollowee_name());
+        if (byUsername.isEmpty()) {
+            throw new RuntimeException("Followee not found");
+        }
+        Poster followee = byUsername.get();
+        byUsername = posterRepository.findByUsername(username);
+        if (byUsername.isEmpty()) {
+            throw new RuntimeException("Follower not found");
+        }
+        Poster follower = byUsername.get();
+        follower.getFollowings().remove(followee);
+        posterRepository.save(follower);
+        return follower;
+    }
+
+    public List<String> getFollowings(String username) {
+        Optional<String> followeesOptional = posterRepository.getFollowees(username);
+        return followeesOptional.stream().collect(Collectors.toList());
     }
 }

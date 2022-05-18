@@ -13,6 +13,7 @@ import com.example.twitterclone.Entities.Poster;
 import com.example.twitterclone.Services.PosterService;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -43,10 +44,25 @@ public class PosterController {
     }
 
     @Operation(security = { @SecurityRequirement(name = SecurityConstants.SECURITY_REQUIREMENT) })
+    @GetMapping(path = "/follow")
+    public List<String> getFollowings(Principal principal) {
+        String username = principal.getName();
+        return posterService.getFollowings(username);
+    }
+
+    @Operation(security = { @SecurityRequirement(name = SecurityConstants.SECURITY_REQUIREMENT) })
     @PostMapping(path = "/follow")
     public PosterDTOWithPosts createFollow(Principal principal, @RequestBody FollowCreateRequest followCreateRequest) {
         String username = principal.getName();
         Poster follower = posterService.createFollow(username, followCreateRequest);
+        return convertToDTOWithPosts(follower);
+    }
+
+    @Operation(security = { @SecurityRequirement(name = SecurityConstants.SECURITY_REQUIREMENT) })
+    @DeleteMapping(path = "/follow")
+    public PosterDTOWithPosts deleteFollow(Principal principal, @RequestBody FollowCreateRequest followDeleteRequest) {
+        String username = principal.getName();
+        Poster follower = posterService.deleteFollow(username, followDeleteRequest);
         return convertToDTOWithPosts(follower);
     }
 

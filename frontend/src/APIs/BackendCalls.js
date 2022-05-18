@@ -22,3 +22,15 @@ export function fetchPoster(username) {
 export function submitPost(body) {
     return axios.post(`/post`, { body });
 }
+
+export function getFollowees() {
+    return axios.get('/poster/follow');
+}
+
+export function follow(username) {
+    return axios.post(`/poster/follow`, { followee_name: username });
+}
+
+export function unfollow(username) {
+    return axios.delete(`/poster/follow`, { data: { followee_name: username } });
+}
