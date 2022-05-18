@@ -1,9 +1,12 @@
 package com.example.twitterclone.Controllers;
 
 import java.security.Principal;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
 import com.example.twitterclone.Configuration.SecurityConstants;
 import com.example.twitterclone.CreateRequests.FollowCreateRequest;
 import com.example.twitterclone.CreateRequests.PosterCreateRequest;
@@ -34,9 +37,13 @@ public class PosterController {
     private final ModelMapper modelMapper;
 
     @PostMapping
-    public PosterDTOWithPosts createPoster(@RequestBody PosterCreateRequest posterCreateRequest) {
+    public String createPoster(@RequestBody PosterCreateRequest posterCreateRequest) {
         Poster createdPoster = posterService.createPoster(posterCreateRequest);
-        return convertToDTOWithPosts(createdPoster);
+        return SecurityConstants.TOKEN_PREFIX + 
+                JWT.create()
+                    .withSubject(createdPoster.getUsername())
+                    .withExpiresAt(new Date(System.currentTimeMillis() + SecurityConstants.EXPIRATION_TIME))
+                    .sign(Algorithm.HMAC512(SecurityConstants.SECRET.getBytes()));
     }
 
     @PostMapping("/login")
