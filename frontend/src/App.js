@@ -15,7 +15,9 @@ function App() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(relogAsync());
+        if (localStorage.getItem("token") !== null) {
+            dispatch(relogAsync());
+        }
     }, []);
 
     return (

@@ -1,4 +1,4 @@
-import { Container, Form, FormControl, Nav, Navbar } from "react-bootstrap";
+import { Container, Form, FormControl, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout, selectUsername } from "../Store/PosterSlice";
@@ -24,8 +24,11 @@ export default function NavBar() {
                     <Nav>
                         <Nav.Link as={Link} to="/">Home</Nav.Link>
                         <Nav.Link as={Link} to="/feed">Feed</Nav.Link>
-                        <Nav.Link as={Link} to="/poster/david">Profile</Nav.Link>
-                        <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
+                        <NavDropdown title={username} id="basic-nav-dropdown">
+                            <NavDropdown.Item as={Link} to={`/poster/${username}`}>Profile</NavDropdown.Item>
+                            <NavDropdown.Divider />
+                            <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
+                        </NavDropdown>
                     </Nav> :
                     <Nav>
                         <Nav.Link as={Link} to="/register">Register</Nav.Link>

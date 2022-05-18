@@ -17,7 +17,7 @@ export const loginAsync = createAsyncThunk(
 
 export const registerAsync = createAsyncThunk(
     "poster/register",
-    async (username, password) => {
+    async ({ username, password }) => {
         const response = await register(username, password);
         return { username: username, token: response.data };
     }

@@ -16,7 +16,8 @@ export default function LoginForm({ text, submitFunction }) {
         setPassword(event.target.value);
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = event => {
+        event.preventDefault();
         dispatch(submitFunction({ username, password }));
         setPassword("");
     }

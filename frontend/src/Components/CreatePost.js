@@ -13,7 +13,8 @@ export default function CreatePost() {
         setText(event.target.value.substring(0, maxLength));
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = event => {
+        event.preventDefault();
         dispatch(createPostAsync(text));
         setText("");
     }
