@@ -1,20 +1,21 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { fetchPoster } from "../APIs/BackendCalls";
+import { fetchPosterAsync, selectPosts, selectProfileCreatedAt, selectProfileUsername } from "../Store/PostSlice";
 import CreatePost from "./CreatePost";
 import Poster from "./Poster";
 import Posts from "./Posts";
 
 export default function PosterPage() {
     const { username } = useParams();
-    const [profile, setProfile] = useState({});
+    const profileUsername = useSelector(selectProfileUsername);
+    const createdAt = useSelector(selectProfileCreatedAt);
+    const posts = useSelector(selectPosts);
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        fetchPoster(username)
-            .then(({ data }) => {
-                setProfile(data)})
-            .catch(err => console.log(err))
+        dispatch(fetchPosterAsync(username));
     }, [username]);
 
     return (
@@ -22,12 +23,12 @@ export default function PosterPage() {
             <Row>
                 <Col sm={4}>
                     <Container>
-                        <Poster username={profile.username} createdAt={profile.createdAt} />
+                        <Poster username={profileUsername} createdAt={createdAt} />
                     </Container>
                 </Col>
                 <Col sm={8} style={{ width: '36rem' }}>
                     <CreatePost />
-                    <Posts posts={profile.posts}/>
+                    <Posts posts={posts}/>
                 </Col>
             </Row>
         </Container>

@@ -1,16 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import { fetchFeed } from "../APIs/BackendCalls";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchFeedAsync, selectPosts } from "../Store/PostSlice";
 import CreatePost from "./CreatePost";
 import Posts from "./Posts";
 
 export default function Feed() {
-    const [posts, setPosts] = useState([]);
+    const posts = useSelector(selectPosts);
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        fetchFeed()
-            .then(({ data }) => setPosts(data))
-            .catch(err => console.log(err))
+        dispatch(fetchFeedAsync());
     }, []);
 
     return (

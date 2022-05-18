@@ -1,16 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import { fetchAllPosts } from "../APIs/BackendCalls";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAllPostsAsync, selectPosts } from "../Store/PostSlice";
 import CreatePost from "./CreatePost";
 import Posts from "./Posts";
 
 export default function AllPosts() {
-    const [posts, setPosts] = useState([]);
+    const posts = useSelector(selectPosts);
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        fetchAllPosts()
-            .then(({ data }) => setPosts(data))
-            .catch(err => console.log(err))
+        dispatch(fetchAllPostsAsync());
     }, []);
 
     return (

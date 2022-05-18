@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { Button, Card, Form } from "react-bootstrap";
-import { submitPost } from "../APIs/BackendCalls";
+import { useDispatch } from "react-redux";
+import { createPostAsync } from "../Store/PostSlice";
 
 export default function CreatePost() {
+    const dispatch = useDispatch();
+
     const maxLength = 250;
     const [text, setText] = useState("");
 
@@ -11,7 +14,7 @@ export default function CreatePost() {
     }
 
     const handleSubmit = () => {
-        submitPost(text);
+        dispatch(createPostAsync(text));
         setText("");
     }
 
