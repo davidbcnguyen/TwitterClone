@@ -14,7 +14,7 @@ export default function NavBar() {
                     <Nav>
                         <Nav.Link as={Link} to="/">Home</Nav.Link>
                         <Nav.Link as={Link} to="/feed">Feed</Nav.Link>
-                        <Nav.Link>Profile</Nav.Link>
+                        <Nav.Link as={Link} to="/poster/david">Profile</Nav.Link>
                         <Nav.Link>Logout</Nav.Link>
                     </Nav>
                     <Nav className="d-flex">

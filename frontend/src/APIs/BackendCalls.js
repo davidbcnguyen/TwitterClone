@@ -10,3 +10,11 @@ export function fetchAllPosts() {
 export function fetchFeed() {
     return axios.get("/post/feed");
 }
+
+export function fetchPosters() {
+    return axios.get("/poster");
+}
+
+export function fetchPoster(username) {
+    return axios.get(`/poster/${username}`)
+}
