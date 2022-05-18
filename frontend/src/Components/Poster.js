@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Button, Card } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { addFollowAsync, fetchFolloweesAsync, removeFollowAsync, selectFollowees, selectFollowers } from "../Store/FollowSlice";
 
 export default function Poster({ username, createdAt }) {
@@ -33,7 +34,9 @@ export default function Poster({ username, createdAt }) {
 
     return (
         <Card>
-            <Card.Title>{username}</Card.Title>
+            <Card.Title>
+                <Link to={`/poster/${username}`}>{username}</Link>
+            </Card.Title>
             <Card.Subtitle>Joined on {convertedTime}</Card.Subtitle>
             {followers[username] === true ? <Card.Text>Follows you</Card.Text> : null}
             <Button onClick={handleButtonClicked}>{followees[username] === true ? "Unfollow" : "Follow"}</Button>

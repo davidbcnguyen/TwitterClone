@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { HashRouter, Route, Routes } from 'react-router-dom';
 import AllPosts from './Components/AllPosts';
 import Feed from './Components/Feed';
 import LoginForm from './Components/LoginForm';
@@ -22,7 +22,7 @@ function App() {
 
     return (
         <div className="App">
-            <BrowserRouter>
+            <HashRouter>
                 <NavBar />
                 <Routes>
                     <Route element={<RequireNotAuth />}>
@@ -36,7 +36,7 @@ function App() {
                         <Route path="/poster/:username" element={<PosterPage />}/>
                     </Route>
                 </Routes>
-            </BrowserRouter>
+            </HashRouter>
         </div>
     );
 }

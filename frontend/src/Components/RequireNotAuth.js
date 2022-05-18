@@ -5,7 +5,7 @@ import { selectUsername } from "../Store/PosterSlice";
 export default function RequireNotAuth() {
     const username = useSelector(selectUsername);
     if (username !== "") {
-        return <Navigate to={"/"}/>
+        return <Navigate to={"/feed"}/>
     }
     return <Outlet />
 }

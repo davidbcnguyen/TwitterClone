@@ -61,7 +61,7 @@ export const postSlice = createSlice({
             })
             .addCase(fetchFeedAsync.fulfilled, (state, action) => {
                 state.status = "idle";
-                state.posts = action.payload.posts;
+                state.posts = action.payload;
                 state.username = "";
                 state.createdAt = null;
             })
