@@ -1,4 +1,4 @@
-import { Button, Card } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 export default function Post({ author, body, createdAt }) {
@@ -20,7 +20,6 @@ export default function Post({ author, body, createdAt }) {
                 </Card.Title>
                 <Card.Subtitle>{convertedTime}</Card.Subtitle>
                 <Card.Text>{body}</Card.Text>
-                <Button><i className="bi bi-shift"></i><i className="bi bi-shift-fill"></i> 100</Button>
             </Card.Body>
         </Card>
     );
