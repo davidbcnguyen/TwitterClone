@@ -11,25 +11,25 @@ import RequireAuth from './Components/RequireAuth';
 import RequireNotAuth from './Components/RequireNotAuth';
 
 function App() {
-  return (
-    <div className="App">
-      <HashRouter>
-        <NavBar />
-        <Routes>
-          <Route element={<RequireNotAuth />}>
-            <Route path="/login" element={<LoginForm text="Login" submitFunction={login} />}/>
-            <Route path="/register" element={<LoginForm text="Register" submitFunction={register} />}/>
-          </Route>
-          <Route element={<RequireAuth />}>
-            <Route path="/" element={<AllPosts />} />
-            <Route path="/feed" element={<Feed />} />
-            <Route path="/poster" element={<PostersPage />}/>
-            <Route path="/poster/:username" element={<PosterPage />}/>
-          </Route>
-        </Routes>
-      </HashRouter>
-    </div>
-  );
+    return (
+        <div className="App">
+            <HashRouter>
+                <NavBar />
+                <Routes>
+                    <Route element={<RequireNotAuth />}>
+                        <Route path="/login" element={<LoginForm text="Login" submitFunction={login} />}/>
+                        <Route path="/register" element={<LoginForm text="Register" submitFunction={register} />}/>
+                    </Route>
+                    <Route element={<RequireAuth />}>
+                        <Route path="/" element={<AllPosts />} />
+                        <Route path="/feed" element={<Feed />} />
+                        <Route path="/poster" element={<PostersPage />}/>
+                        <Route path="/poster/:username" element={<PosterPage />}/>
+                    </Route>
+                </Routes>
+            </HashRouter>
+        </div>
+    );
 }
 
 export default App;
