@@ -44,6 +44,12 @@ public class PosterController {
     }
 
     @Operation(security = { @SecurityRequirement(name = SecurityConstants.SECURITY_REQUIREMENT) })
+    @GetMapping("/relog")
+    public String relog(Principal principal) {
+        return principal.getName();
+    }
+
+    @Operation(security = { @SecurityRequirement(name = SecurityConstants.SECURITY_REQUIREMENT) })
     @GetMapping(path = "/follow")
     public List<String> getFollowings(Principal principal) {
         String username = principal.getName();

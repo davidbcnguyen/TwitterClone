@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { login, register } from "../APIs/BackendCalls";
+import { login, register, relog } from "../APIs/BackendCalls";
 
 const initialState = {
     username: "",
@@ -23,6 +23,14 @@ export const registerAsync = createAsyncThunk(
     }
 );
 
+export const relogAsync = createAsyncThunk(
+    "poster/relog",
+    async () => {
+        const response = await relog(localStorage.getItem("token"));
+        return response.data;
+    }
+)
+
 export const posterSlice = createSlice({
     name: "poster",
     initialState,
@@ -30,6 +38,7 @@ export const posterSlice = createSlice({
         logout: (state) => {
             state.username = "";
             axios.defaults.headers.common["Authorization"] = "";
+            localStorage.removeItem("token");
         }
     },
     extraReducers: (builder) => {
@@ -41,6 +50,7 @@ export const posterSlice = createSlice({
                 state.status = "idle";
                 state.username = action.payload.username;
                 axios.defaults.headers.common["Authorization"] = action.payload.token;
+                localStorage.setItem("token", action.payload.token);
             })
             .addCase(registerAsync.pending, (state) => {
                 state.status = "loading";
@@ -49,6 +59,15 @@ export const posterSlice = createSlice({
                 state.status = "idle";
                 state.username = action.payload.username;
                 axios.defaults.headers.common["Authorization"] = action.payload.token;
+                localStorage.setItem("token", action.payload.token);
+            })
+            .addCase(relogAsync.pending, (state) => {
+                state.status = "loading";
+            })
+            .addCase(relogAsync.fulfilled, (state, action) => {
+                state.status = "idle";
+                state.username = action.payload;
+                axios.defaults.headers.common["Authorization"] = localStorage.getItem("token");
             })
     }
 });

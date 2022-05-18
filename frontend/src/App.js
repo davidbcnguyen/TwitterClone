@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { HashRouter, Route, Routes } from 'react-router-dom';
 import AllPosts from './Components/AllPosts';
 import Feed from './Components/Feed';
@@ -8,9 +9,15 @@ import PosterPage from './Components/PosterPage';
 import PostersPage from './Components/PostersPage';
 import RequireAuth from './Components/RequireAuth';
 import RequireNotAuth from './Components/RequireNotAuth';
-import { loginAsync, registerAsync } from './Store/PosterSlice';
+import { loginAsync, registerAsync, relogAsync } from './Store/PosterSlice';
 
 function App() {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(relogAsync());
+    }, []);
+
     return (
         <div className="App">
             <HashRouter>

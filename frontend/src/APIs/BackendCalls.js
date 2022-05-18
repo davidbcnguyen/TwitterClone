@@ -42,3 +42,7 @@ export function login(username, password) {
 export function register(username, password) {
     return axios.post("/poster/", { username, password });
 }
+
+export function relog(token) {
+    return axios.get("/poster/relog", { headers: { Authorization: token } });
+}
