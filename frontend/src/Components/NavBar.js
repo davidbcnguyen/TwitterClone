@@ -23,9 +23,9 @@ export default function NavBar() {
                     <Nav>
                         <Nav.Link as={Link} to="/feed">Feed</Nav.Link>
                         <NavDropdown title={username} id="basic-nav-dropdown">
-                            <NavDropdown.Item as={Link} to={`/poster/${username}`}>Profile</NavDropdown.Item>
+                            <NavDropdown.Item as={Link} to={`/poster/${username}`}><i className="bi bi-person-circle"></i> Profile</NavDropdown.Item>
                             <NavDropdown.Divider />
-                            <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
+                            <NavDropdown.Item onClick={handleLogout}><i className="bi bi-box-arrow-right"></i> Logout</NavDropdown.Item>
                         </NavDropdown>
                     </Nav> :
                     <Nav>

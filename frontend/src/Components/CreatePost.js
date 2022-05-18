@@ -15,8 +15,10 @@ export default function CreatePost() {
 
     const handleSubmit = event => {
         event.preventDefault();
-        dispatch(createPostAsync(text));
-        setText("");
+        if (text.length > 0) {
+            dispatch(createPostAsync(text));
+            setText("");
+        }
     }
 
     return (
@@ -28,7 +30,7 @@ export default function CreatePost() {
                         <Form.Control as="textarea" rows={3} value={text} onChange={handleTyping}/>
                         <Form.Text id="characterCounter">{text.length} / {maxLength}</Form.Text>
                     </Form.Group>
-                    <Button variant="primary" type="submit">Submit</Button>
+                    <Button variant="primary" type="submit"><i className="bi bi-send"></i></Button>
                 </Form>
             </Card.Body>
         </Card>

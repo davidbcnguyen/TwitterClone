@@ -3,8 +3,10 @@ import { Button, Card } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { addFollowAsync, fetchFolloweesAsync, removeFollowAsync, selectFollowees, selectFollowers } from "../Store/FollowSlice";
+import { selectUsername } from "../Store/PosterSlice";
 
 export default function Poster({ username, createdAt }) {
+    const currentLogin = useSelector(selectUsername);
     const followees = useSelector(selectFollowees);
     const followers = useSelector(selectFollowers);
     const dispatch = useDispatch();
@@ -39,7 +41,11 @@ export default function Poster({ username, createdAt }) {
             </Card.Title>
             <Card.Subtitle>Joined on {convertedTime}</Card.Subtitle>
             {followers[username] === true ? <Card.Text>Follows you</Card.Text> : null}
-            <Button onClick={handleButtonClicked}>{followees[username] === true ? "Unfollow" : "Follow"}</Button>
+            <Button onClick={handleButtonClicked} disabled={currentLogin === username}>
+                {followees[username] === true ? 
+                    <div><i className="bi bi-bookmark-fill"></i> Followed</div> : 
+                    <div><i className="bi bi-bookmark"></i> Follow</div>}
+            </Button>
         </Card>
     );
 }
