@@ -1,5 +1,10 @@
 # Get Started
 
+## Info
+Backend API will be served in the default port `:8080`
+
+To change database configurations, change it in `/src/main/resources/application.properties`
+
 ## Requirements
 - Java 17
 - Spring Boot 2.6.7
@@ -35,3 +40,6 @@ OpenAPI url
 
 Swagger UI:
 > `localhost:8080/swagger-ui/index.html`
+
+## Docker
+The `Dockerfile` in this directory was designed to work with another container running a `mysql` instance. It might not work on its own.

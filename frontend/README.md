@@ -37,3 +37,6 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 - react-bootstrap
 - bootstrap
 - bootstrap-icons
+
+## Docker
+The provided `Dockerfile` will serve the production built static files from Nginx on port `:3000`.
