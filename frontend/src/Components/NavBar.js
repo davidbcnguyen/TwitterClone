@@ -13,7 +13,7 @@ export default function NavBar() {
     }
 
     return (
-        <Navbar expand="lg" bg="dark" variant="dark">
+        <Navbar expand="lg" bg="dark" variant="dark" className="mb-5">
             <Container>
                 <Navbar.Brand as={Link} to="/">Twitter Clone</Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
