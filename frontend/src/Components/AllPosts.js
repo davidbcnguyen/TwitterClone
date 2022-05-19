@@ -10,6 +10,7 @@ export default function AllPosts() {
     const dispatch = useDispatch();
 
     useEffect(() => {
+        document.title = "All Posts";
         dispatch(fetchAllPostsAsync());
     }, []);
 

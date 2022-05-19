@@ -17,6 +17,7 @@ export default function PosterPage() {
     const dispatch = useDispatch();
 
     useEffect(() => {
+        document.title = username;
         dispatch(fetchPosterAsync(username));
     }, [username]);
 

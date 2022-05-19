@@ -8,6 +8,7 @@ export default function PostersPage() {
     const [searchParams, setSearchParams] = useSearchParams();
 
     useEffect(() => {
+        document.title = "Search";
         if (searchParams.has("query")) {
             searchPosters(searchParams.get("query"))
                 .then(({ data }) => setPosters(data))

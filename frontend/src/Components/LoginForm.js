@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 
@@ -7,6 +7,10 @@ export default function LoginForm({ text, submitFunction }) {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+
+    useEffect(() => {
+        document.title = text;
+    }, [text]);
 
     const handleUsernameChange = event => {
         setUsername(event.target.value);
