@@ -1,0 +1,27 @@
+version: '2.5'
+services:
+    database:
+        image: "mysql:8.0.29"
+        restart: always
+        ports:
+            - 3307:3306
+        environment:
+            MYSQL_DATABASE: db_twitter_clone
+            MYSQL_USER: test
+            MYSQL_PASSWORD: password
+            MYSQL_ROOT_PASSWORD: password
+
+    backend:
+        build: ./backend
+        restart: always
+        ports:
+            - 8080:8080
+        depends_on:
+            - database
+
+    frontend:
+        build: ./frontend
+        ports:
+            - 3000:80
+        depends_on:
+            - backend   
