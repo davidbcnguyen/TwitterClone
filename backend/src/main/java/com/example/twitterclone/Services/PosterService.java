@@ -3,7 +3,6 @@ package com.example.twitterclone.Services;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import javax.persistence.EntityNotFoundException;
 
@@ -84,7 +83,6 @@ public class PosterService {
     }
 
     public List<String> getFollowings(String username) {
-        Optional<String> followeesOptional = posterRepository.getFollowees(username);
-        return followeesOptional.stream().collect(Collectors.toList());
+        return posterRepository.getFollowees(username);
     }
 }
