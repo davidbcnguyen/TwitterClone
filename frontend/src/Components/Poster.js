@@ -1,8 +1,7 @@
-import { useEffect } from "react";
 import { Button, Card } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { addFollowAsync, fetchFolloweesAsync, removeFollowAsync, selectFollowees, selectFollowers } from "../Store/FollowSlice";
+import { addFollowAsync, removeFollowAsync, selectFollowees, selectFollowers } from "../Store/FollowSlice";
 import { selectUsername } from "../Store/PosterSlice";
 
 export default function Poster({ username, createdAt }) {
@@ -10,10 +9,6 @@ export default function Poster({ username, createdAt }) {
     const followees = useSelector(selectFollowees);
     const followers = useSelector(selectFollowers);
     const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch(fetchFolloweesAsync())
-    }, []);
 
     const convertedTime = new Date(createdAt).toLocaleDateString(
         "en-ca",

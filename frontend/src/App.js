@@ -9,6 +9,7 @@ import PosterPage from './Components/PosterPage';
 import PostersPage from './Components/PostersPage';
 import RequireAuth from './Components/RequireAuth';
 import RequireNotAuth from './Components/RequireNotAuth';
+import { fetchFolloweesAsync } from './Store/FollowSlice';
 import { loginAsync, registerAsync, relogAsync } from './Store/PosterSlice';
 
 function App() {
@@ -16,7 +17,9 @@ function App() {
 
     useEffect(() => {
         if (localStorage.getItem("token") !== null) {
-            dispatch(relogAsync());
+            dispatch(relogAsync()).then(() => {
+                dispatch(fetchFolloweesAsync());
+            });
         }
     }, []);
 

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
 import { useDispatch } from "react-redux";
+import { fetchFolloweesAsync } from "../Store/FollowSlice";
 
 export default function LoginForm({ text, submitFunction }) {
     const dispatch = useDispatch();
@@ -22,7 +23,9 @@ export default function LoginForm({ text, submitFunction }) {
 
     const handleSubmit = event => {
         event.preventDefault();
-        dispatch(submitFunction({ username, password }));
+        dispatch(submitFunction({ username, password })).then(() => {
+            dispatch(fetchFolloweesAsync());
+        });
         setPassword("");
     }
 
